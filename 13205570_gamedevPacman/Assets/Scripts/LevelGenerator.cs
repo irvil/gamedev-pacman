@@ -9,6 +9,8 @@ public class LevelGenerator : MonoBehaviour
     // 3 - inside corner, 4 - inside wall
     // 5 - normal pellet, 6 - power pellet
     // 7 - T junction
+
+    // Note that the levelMap is 14x13
     int[,] levelMap = 
     {
         {1,2,2,2,2,2,2,2,2,2,2,2,2,7},
@@ -53,6 +55,7 @@ public class LevelGenerator : MonoBehaviour
 
     void buildFirstQuad()
     {
+        // Note: any time we use i == levelMap...UpperBound(0) + 1, we are referring to 'x = 14', the extra line
         for (int i = 0; i < levelMap.GetUpperBound(0) + 1; i++)
         {
             for (int j = 0; j < levelMap.GetUpperBound(1) + 1; j++)
@@ -60,7 +63,6 @@ public class LevelGenerator : MonoBehaviour
                 switch (levelMap[i,j])
                 {
                     case 1:
-                        //Instantiate(outerCorner, new Vector2(j, -i), Quaternion.identity);
                         if (i == 9 && j == 0) 
                         {
                             Instantiate(outerCorner, new Vector2(j, -i), Quaternion.Euler(new Vector3(0, 0, 90)));
@@ -84,20 +86,37 @@ public class LevelGenerator : MonoBehaviour
                         }
                         break;
                     case 3:
-                        Instantiate(innerCorner, new Vector2(j, -i), Quaternion.identity);
+                        if ((i == 4 && (j == 2 || j == 7)) || (i != 7 && j  == levelMap.GetUpperBound(1)) || (i == 7 && (j == 2 || j == 10)) || (i == 9 && j == 8) || (i == levelMap.GetUpperBound(0) - 1 && j == 7)) 
+                        {
+                            Instantiate(innerCorner, new Vector2(j, -i), Quaternion.Euler(new Vector3(0, 0, 90)));
+                        } else if (i == 4 && (j == 5 || j == 11) || (i == 7 && j == 5) || (i == 10 && j == 11) || (i == levelMap.GetUpperBound(0) - 1 && j == 8))
+                        {
+                            Instantiate(innerCorner, new Vector2(j, -i), Quaternion.Euler(new Vector3(0, 0, 180)));
+                        } else if ((i == 2 && (j == 5 || j == 11)) || (i == 6 && (j == 5 || j == 8)) || (i == 9 && j == 11) || (i == 7 && j == levelMap.GetUpperBound(1)))
+                        {
+                            Instantiate(innerCorner, new Vector2(j, -i), Quaternion.Euler(new Vector3(0, 0, 270)));
+                        } else
+                        {
+                            Instantiate(innerCorner, new Vector2(j, -i), Quaternion.identity);
+                        }
                         break;
                     case 4:
-                        Instantiate(innerWall, new Vector2(j, -i), Quaternion.identity);
+                        if ((i <= 9 && i != 6 && j == levelMap.GetUpperBound(1)) || (i == 3) || (i >= 7 && i <= 12 && (j == 7 || j == 8)) || (j == 10 && i >= levelMap.GetUpperBound(0) - 1))
+                        {
+                            Instantiate(innerWall, new Vector2(j, -i), Quaternion.Euler(new Vector3(0, 0, -90)));
+                        } else 
+                        {
+                            Instantiate(innerWall, new Vector2(j, -i), Quaternion.identity);
+                        }
                         break;
                     case 7:
                         Instantiate(tJunction, new Vector2(j, -i), Quaternion.identity);
                         break;
                     default:
-                        GameObject g = new GameObject("x: " + i + ", y: " + j);
-                        g.transform.position = new Vector2(j, -i);
+                        //GameObject g = new GameObject("x: " + i + ", y: " + j);
+                        //g.transform.position = new Vector2(j, -i);
                         break;
                 }
-                //Instantiate(tJunction, new Vector2(i, j), Quaternion.identity);
             }
         }
     }
