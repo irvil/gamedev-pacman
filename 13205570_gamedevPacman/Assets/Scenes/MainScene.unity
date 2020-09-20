@@ -157,7 +157,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0.15686275, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -607,6 +607,7 @@ GameObject:
   - component: {fileID: 1881082896}
   - component: {fileID: 1881082895}
   - component: {fileID: 1881082897}
+  - component: {fileID: 1881082898}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -673,7 +674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881082894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.71, y: 0.77, z: 0}
+  m_LocalPosition: {x: 1, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -698,6 +699,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1881082898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881082894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf71c2929936ead44824fbfe7284a9bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2097755588
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,12 +828,12 @@ PrefabInstance:
     - target: {fileID: 7779940952838099385, guid: 4c650e9232ff2464381ae9f822582f0a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.8
+      value: -5.6
       objectReference: {fileID: 0}
     - target: {fileID: 7779940952838099385, guid: 4c650e9232ff2464381ae9f822582f0a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.46
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 7779940952838099385, guid: 4c650e9232ff2464381ae9f822582f0a,
         type: 3}
