@@ -40,6 +40,10 @@ public class LevelGenerator : MonoBehaviour
     private GameObject outerWall;
     [SerializeField]
     private GameObject tJunction;
+    [SerializeField]
+    private GameObject regPellet;
+    [SerializeField]
+    private GameObject powPellet;
 
     // Start is called before the first frame update
     void Start()
@@ -108,6 +112,12 @@ public class LevelGenerator : MonoBehaviour
                         {
                             Instantiate(innerWall, new Vector2(j, -i), Quaternion.identity);
                         }
+                        break;
+                    case 5:
+                        Instantiate(regPellet, new Vector2(j, -i), Quaternion.identity);
+                        break;
+                    case 6:
+                        Instantiate(powPellet, new Vector2(j, -i), Quaternion.identity);
                         break;
                     case 7:
                         Instantiate(tJunction, new Vector2(j, -i), Quaternion.identity);
