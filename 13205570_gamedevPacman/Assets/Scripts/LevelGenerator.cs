@@ -50,6 +50,8 @@ public class LevelGenerator : MonoBehaviour
     {
         buildFirstQuad();
         buildSecondQuad();
+        buildThirdQuad();
+        buildFourthQuad();
     }
 
     // Update is called once per frame
@@ -200,7 +202,163 @@ public class LevelGenerator : MonoBehaviour
                         break;
                     case 7:
                         GameObject secondJunction = Instantiate(tJunction, new Vector2(k, -i), Quaternion.identity);
-                        secondJunction.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                        secondJunction.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f); // Flip horizontally
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    void buildThirdQuad() 
+    {
+        // Unlike 1st and 2nd quads, we work with a 13x13 space rather than a 14x13
+
+        int k; // Used for adjusting to mirror i vertically
+
+        for (int i = 0; i < levelMap.GetUpperBound(0); i++)
+        {
+            k = 2 * levelMap.GetUpperBound(0) - i; 
+
+            for (int j = 0; j < levelMap.GetUpperBound(1) + 1; j++)
+            {
+                switch (levelMap[i,j])
+                {
+                    case 1:
+                        if (i == 9 && j == 0) 
+                        {
+                            Instantiate(outerCorner, new Vector2(j, -k), Quaternion.identity);
+                        } else if (i == 9 && j == 5)
+                        {
+                            Instantiate(outerCorner, new Vector2(j, -k), Quaternion.Euler(new Vector3(0, 0, 180)));
+                        } else if (i == 13 && j == 5)
+                        {
+                            Instantiate(outerCorner, new Vector2(j, -k), Quaternion.Euler(new Vector3(0, 0, 270)));
+                        } else 
+                        {
+                            Instantiate(outerCorner, new Vector2(j, -k), Quaternion.Euler(new Vector3(0, 0, 90)));
+                        }
+                        break;
+                    case 2:
+                        if (i > 0 && i < 9 || (i >= 9 && i <= 13 && j == 5)) 
+                        {
+                            Instantiate(outerWall, new Vector2(j, -k), Quaternion.Euler(new Vector3(0, 0, -90)));
+                        } else {
+                            Instantiate(outerWall, new Vector2(j, -k), Quaternion.identity);
+                        }
+                        break;
+                    case 3:
+                        if ((i == 4 && (j == 2 || j == 7)) || (i != 7 && j  == levelMap.GetUpperBound(1)) || (i == 7 && (j == 2 || j == 10)) || (i == 9 && j == 8) || (i == levelMap.GetUpperBound(0) - 1 && j == 7)) 
+                        {
+                            Instantiate(innerCorner, new Vector2(j, -k), Quaternion.identity);
+                        } else if (i == 4 && (j == 5 || j == 11) || (i == 7 && j == 5) || (i == 10 && j == 11) || (i == levelMap.GetUpperBound(0) - 1 && j == 8))
+                        {
+                            Instantiate(innerCorner, new Vector2(j, -k), Quaternion.Euler(new Vector3(0, 0, 270)));
+                        } else if ((i == 2 && (j == 5 || j == 11)) || (i == 6 && (j == 5 || j == 8)) || (i == 9 && j == 11) || (i == 7 && j == levelMap.GetUpperBound(1)))
+                        {
+                            Instantiate(innerCorner, new Vector2(j, -k), Quaternion.Euler(new Vector3(0, 0, 180)));
+                        } else
+                        {
+                            Instantiate(innerCorner, new Vector2(j, -k), Quaternion.Euler(new Vector3(0, 0, 90)));
+                        }
+                        break;
+                    case 4:
+                        if ((i <= 9 && i != 6 && j == levelMap.GetUpperBound(1)) || (i == 3) || (i >= 7 && i <= 12 && (j == 7 || j == 8)) || (j == 10 && i >= levelMap.GetUpperBound(0) - 1))
+                        {
+                            Instantiate(innerWall, new Vector2(j, -k), Quaternion.Euler(new Vector3(0, 0, -90)));
+                        } else 
+                        {
+                            Instantiate(innerWall, new Vector2(j, -k), Quaternion.identity);
+                        }
+                        break;
+                    case 5:
+                        Instantiate(regPellet, new Vector2(j, -k), Quaternion.identity);
+                        break;
+                    case 6:
+                        Instantiate(powPellet, new Vector2(j, -k), Quaternion.identity);
+                        break;
+                    case 7:
+                        GameObject thirdJunction = Instantiate(tJunction, new Vector2(j, -k), Quaternion.identity);
+                        thirdJunction.transform.localScale = new Vector3(1.0f, -1.0f, 1.0f); // Flip vertically
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    void buildFourthQuad()
+    {
+        int k, l; // Used for adjusting to mirror i vertically and j horizontally, respectively
+
+        for (int i = 0; i < levelMap.GetUpperBound(0); i++)
+        {
+            k = 2 * levelMap.GetUpperBound(0) - i; 
+
+            for (int j = 0; j < levelMap.GetUpperBound(1) + 1; j++)
+            {
+                l = 2 * levelMap.GetUpperBound(1) + 1 - j;
+                
+                switch (levelMap[i,j])
+                {
+                    case 1:
+                        if (i == 9 && j == 0) 
+                        {
+                            Instantiate(outerCorner, new Vector2(l, -k), Quaternion.Euler(new Vector3(0, 0, 270)));
+                        } else if (i == 9 && j == 5)
+                        {
+                            Instantiate(outerCorner, new Vector2(l, -k), Quaternion.Euler(new Vector3(0, 0, 90)));
+                        } else if (i == 13 && j == 5)
+                        {
+                            Instantiate(outerCorner, new Vector2(l, -k), Quaternion.identity);
+                        } else 
+                        {
+                            Instantiate(outerCorner, new Vector2(l, -k), Quaternion.Euler(new Vector3(0, 0, 180)));
+                        }
+                        break;
+                    case 2:
+                        if (i > 0 && i < 9 || (i >= 9 && i <= 13 && j == 5)) 
+                        {
+                            Instantiate(outerWall, new Vector2(l, -k), Quaternion.Euler(new Vector3(0, 0, -90)));
+                        } else {
+                            Instantiate(outerWall, new Vector2(l, -k), Quaternion.identity);
+                        }
+                        break;
+                    case 3:
+                        if ((i == 4 && (j == 2 || j == 7)) || (i != 7 && j  == levelMap.GetUpperBound(1)) || (i == 7 && (j == 2 || j == 10)) || (i == 9 && j == 8) || (i == levelMap.GetUpperBound(0) - 1 && j == 7)) 
+                        {
+                            Instantiate(innerCorner, new Vector2(l, -k), Quaternion.Euler(new Vector3(0, 0, 270)));
+                        } else if (i == 4 && (j == 5 || j == 11) || (i == 7 && j == 5) || (i == 10 && j == 11) || (i == levelMap.GetUpperBound(0) - 1 && j == 8))
+                        {
+                            Instantiate(innerCorner, new Vector2(l, -k), Quaternion.identity);
+                        } else if ((i == 2 && (j == 5 || j == 11)) || (i == 6 && (j == 5 || j == 8)) || (i == 9 && j == 11) || (i == 7 && j == levelMap.GetUpperBound(1)))
+                        {
+                            Instantiate(innerCorner, new Vector2(l, -k), Quaternion.Euler(new Vector3(0, 0, 90)));
+                        } else
+                        {
+                            Instantiate(innerCorner, new Vector2(l, -k), Quaternion.Euler(new Vector3(0, 0, 180)));
+                        }
+                        break;
+                    case 4:
+                        if ((i <= 9 && i != 6 && j == levelMap.GetUpperBound(1)) || (i == 3) || (i >= 7 && i <= 12 && (j == 7 || j == 8)) || (j == 10 && i >= levelMap.GetUpperBound(0) - 1))
+                        {
+                            Instantiate(innerWall, new Vector2(l, -k), Quaternion.Euler(new Vector3(0, 0, -90)));
+                        } else 
+                        {
+                            Instantiate(innerWall, new Vector2(l, -k), Quaternion.identity);
+                        }
+                        break;
+                    case 5:
+                        Instantiate(regPellet, new Vector2(l, -k), Quaternion.identity);
+                        break;
+                    case 6:
+                        Instantiate(powPellet, new Vector2(l, -k), Quaternion.identity);
+                        break;
+                    case 7:
+                        GameObject thirdJunction = Instantiate(tJunction, new Vector2(l, -k), Quaternion.identity);
+                        thirdJunction.transform.localScale = new Vector3(-1.0f, -1.0f, 1.0f); // Flip x and y
                         break;
                     default:
                         break;
