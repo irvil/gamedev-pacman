@@ -743,6 +743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1500737328}
+  - component: {fileID: 1500737329}
   m_Layer: 0
   m_Name: Ghost Animation Cycle
   m_TagString: Untagged
@@ -764,6 +765,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1500737329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500737327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d758b96fe55e84190044564891f3fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redAnimController: {fileID: 1666960041}
+  pinkAnimController: {fileID: 791798054}
+  cyanAnimController: {fileID: 2097755591}
+  orangeAnimController: {fileID: 1341800368}
 --- !u!1 &1666960038
 GameObject:
   m_ObjectHideFlags: 0

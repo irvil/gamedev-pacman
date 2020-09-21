@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class CycleGhostAnim : MonoBehaviour
 {
+    public Animator redAnimController;
+    public Animator pinkAnimController;
+    public Animator cyanAnimController;
+    public Animator orangeAnimController;
+    
     private int lastTime;
-    private int lastScared;
-    private int lastRecover;
-    private int lastDead;
     private float timer;
 
     // Time increments
     float scaredWait = 3.0f;
-    float recoverWait = 6.0f;
-    float deadWait = 12.0f;
+
+    Coroutine cycleCoroutine;
     
     // Start is called before the first frame update
     void Start()
@@ -27,8 +29,34 @@ public class CycleGhostAnim : MonoBehaviour
         timer += Time.deltaTime;
         if (lastTime < timer) lastTime++;
 
-        if (lastTime % (int) scaredWait == 0){
-            //GhostAnimator_Red.SetTrigger("scared");
+        if (lastTime % (int) scaredWait == 0 && cycleCoroutine == null){
+            cycleCoroutine = StartCoroutine(cycleAnim());
         }
+    }
+
+    //void ResetTimer() => timer = 0;
+
+    IEnumerator cycleAnim(){ // Enables for each state to be played for 3 seconds each
+        
+        redAnimController.SetTrigger("scared");
+        pinkAnimController.SetTrigger("scared");
+        cyanAnimController.SetTrigger("scared");
+        orangeAnimController.SetTrigger("scared");
+        yield return new WaitForSeconds(3.0f);
+        
+        redAnimController.SetTrigger("recovering");
+        pinkAnimController.SetTrigger("recovering");
+        cyanAnimController.SetTrigger("recovering");
+        orangeAnimController.SetTrigger("recovering");
+        yield return new WaitForSeconds(3.0f);
+        
+        redAnimController.SetTrigger("dead");
+        pinkAnimController.SetTrigger("dead");
+        cyanAnimController.SetTrigger("dead");
+        orangeAnimController.SetTrigger("dead");
+        yield return new WaitForSeconds(6.0f);
+        
+        timer = 0;
+        cycleCoroutine = null;
     }
 }
