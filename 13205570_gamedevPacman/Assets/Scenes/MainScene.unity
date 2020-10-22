@@ -489,6 +489,7 @@ MonoBehaviour:
     type: 3}
   powPellet: {fileID: 7779940952838099383, guid: 4c650e9232ff2464381ae9f822582f0a,
     type: 3}
+  mapPieces: {fileID: 1329230884}
 --- !u!1 &971436645
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +633,36 @@ MonoBehaviour:
   source: {fileID: 971436646}
   introClip: {fileID: 8300000, guid: 899f29cf0b1e46a45ad358adb2c6473b, type: 3}
   ghostNormalClip: {fileID: 8300000, guid: 89ea83984e4e1b345ba7ea38b3ac05b6, type: 3}
+--- !u!1 &1329230883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1329230884}
+  m_Layer: 0
+  m_Name: MapPieces
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1329230884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329230883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.042039, y: -9.055617, z: -159.45117}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1341800365
 GameObject:
   m_ObjectHideFlags: 0
