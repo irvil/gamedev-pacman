@@ -25,5 +25,17 @@ public class UIManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode){}
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.buildIndex == 0)
+        {
+            Button exitBtn = GameObject.FindWithTag("ExitButton").GetComponent<Button>();
+            exitBtn.onClick.AddListener(ExitLevel);
+        }
+    }
+
+    public void ExitLevel()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
 }
